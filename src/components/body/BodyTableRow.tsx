@@ -25,7 +25,7 @@ const BodyTableRow: React.FC<IProps> = ({ columns, rowIndex, rowItem }) => {
         : rowItem.value[String(col.key)];
 
       return (
-        <td key={ci}>
+        <td key={ci} >
           <span>{item}</span>
         </td>
       );
