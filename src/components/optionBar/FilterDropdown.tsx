@@ -4,12 +4,16 @@ import * as React from "react";
 import triangleIcon from "../../assets/icons/icon-triangle.svg";
 
 interface IProps {
-  items: any[],
-  selectedItem: any
-  selectCallBack: any,
+  items: any[];
+  selectedItem: any;
+  selectCallBack: any;
 }
 
-const FilterDropdown: React.FC<IProps> = ({items, selectedItem, selectCallBack}) => {
+const FilterDropdown: React.FC<IProps> = ({
+  items,
+  selectedItem,
+  selectCallBack,
+}) => {
   // const context = useDatagridFilterContext();
   // const handleColumnSelect: React.ChangeEventHandler<HTMLSelectElement> = (ev) => {
   //     console.log(ev.target.value);
@@ -19,29 +23,28 @@ const FilterDropdown: React.FC<IProps> = ({items, selectedItem, selectCallBack})
   const onClick = () => setIsActive(!isActive);
 
   return (
-    //   <div className="dropdown-container">
-    <div className="menu-container">
-      <div className="content-box">
-        <button onClick={onClick} className="menu-trigger">
-        {selectedItem}
+    <div className="dropdown-container">
+      <div className="menu-container">
+        <div className="content-box">
+          <button onClick={onClick} className="menu-trigger">
+            {selectedItem}
           </button>
-        <img src={triangleIcon} alt="icon" />
+          <img src={triangleIcon} alt="icon" />
+        </div>
+        <nav
+          ref={dropdownRef}
+          className={`menu ${isActive ? "active" : "inactive"}`}
+        >
+          <ul className="menu_list">
+            {(items || []).map((item, i) => (
+              <li id={item} key={i} onClick={selectCallBack}>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
-      <nav
-        ref={dropdownRef}
-        className={`menu ${isActive ? "active" : "inactive"}`}
-      >
-        <ul>
-          {(items || []).map(
-            (item,i) => (
-            <li id={item} key = {i} onClick = {selectCallBack}>
-              {item}
-            </li>)
-          )}
-        </ul>
-      </nav>
     </div>
-    //   </div>
   );
 };
 export default FilterDropdown;
