@@ -30,10 +30,7 @@ const BodyTable: React.FC<IProps> = ({
           if (context.data) {
             const rowItem = !filteredContext._isFiltered
               ? getDataItem(context.data, rowIndex)
-              : getDataItem(
-                  filteredContext._filteredData,
-                  filteredContext._filteredDataLength
-                );
+              : getDataItem(filteredContext._filteredData, rowIndex);
 
             if (rowItem) {
               return (
