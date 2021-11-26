@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export enum ContextActionTypes {
-  SET_STATE = "SET_STATE"
+  SET_STATE = "SET_STATE",
 }
 
 export enum LayoutContextActionTypes {
@@ -13,7 +13,7 @@ export enum LayoutContextActionTypes {
   SET_BODY_DIMENSION = "SET_BODY_DIMENSION",
   SET_HEADER_HEIGHT = "SET_HEADER_HEIGHT",
   SET_BODY_HEIGHT = "SET_BODY_HEIGHT",
-  SET_STATE = "SET_STATE"
+  SET_STATE = "SET_STATE",
 }
 
 type DataItemType = "C" | "U" | "D";
@@ -97,6 +97,7 @@ export interface IDatagridStatusBar extends IDatagridCommonProps {
   showScroller?: boolean;
   scrollerSize?: number;
 }
+export interface IDatagridOptionBar extends IDatagridCommonProps {}
 
 // local variables
 export interface IDatagridContext extends IDatagridProps {

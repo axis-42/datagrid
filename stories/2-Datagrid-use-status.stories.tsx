@@ -1,12 +1,9 @@
 import * as React from "react";
-import { action } from "@storybook/addon-actions";
 import "../src/style/index.less";
-import { IColumn, IDataItem } from "../src/@interface";
 import {
   Datagrid,
   DatagridBody,
   DatagridHeader,
-  DatagridHorizontalScroller,
   DatagridVerticalScroller,
   DatagridStatusBar,
 } from "../src";
