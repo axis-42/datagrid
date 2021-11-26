@@ -94,7 +94,6 @@ const FilterSelector: React.FC<IPros> = ({ setDisplay }) => {
   };
 
   return (
-    // filterContext._isFiltered && (
     <div className="ac-datagrid--option_bar__filter_selector">
       <ul className="filter_selector__list">
         <li className="filter_selector__item">
@@ -123,7 +122,6 @@ const FilterSelector: React.FC<IPros> = ({ setDisplay }) => {
         </li>
       </ul>
     </div>
-    //  )
   );
 };
 
