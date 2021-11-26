@@ -5,18 +5,17 @@ import {
   IData,
 } from "../@interface";
 
-export type DatagridFilterContextAction = |
-{
-  type: FilterContextActionTypes.SET_FILTER;
-  isFiltered: boolean;
-  filteredData: IData;
-  filteredDataLength: number;
-}
-|
-{
-  type: FilterContextActionTypes.SET_STATE;
-  state: IDatagridFilterContext;
-};
+export type DatagridFilterContextAction =
+  | {
+      type: FilterContextActionTypes.SET_FILTER;
+      isFiltered: boolean;
+      filteredData: IData;
+      filteredDataLength: number;
+    }
+  | {
+      type: FilterContextActionTypes.SET_STATE;
+      state: IDatagridFilterContext;
+    };
 
 const DatagridFilterContext = React.createContext<IDatagridFilterContext | null>(
   null
@@ -36,13 +35,13 @@ const DatagridFilterContextReducer = (
         ...state,
         _isFiltered: action.isFiltered,
         _filteredData: action.filteredData,
-        _filteredDataLength: action.filteredDataLength
+        _filteredDataLength: action.filteredDataLength,
       };
     case FilterContextActionTypes.SET_STATE:
       return {
         ...state,
-        ...action.state
-      }
+        ...action.state,
+      };
     default:
       throw new Error("Unhandled action");
   }

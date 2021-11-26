@@ -27,8 +27,6 @@ const BodyTableRow: React.FC<IProps> = ({ columns, rowIndex, rowItem }) => {
       const item = Array.isArray(rowItem.value)
         ? rowItem.value[Number(col.key)]
         : rowItem.value[String(col.key)];
-      console.log(`itme is : ${item}`);
-
       return (
         <td key={ci}>
           <span>{item}</span>

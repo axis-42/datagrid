@@ -13,7 +13,7 @@ const OptionBar: React.FC<IDatagridOptionBar> = () => {
   return (
     <div className="ac-datagrid--option_bar">
       <FilterToggle onClick={onClick} />
-      {display && <FilterSelector />}
+      {display && <FilterSelector setDisplay={onClick} />}
     </div>
   );
 };

@@ -3,12 +3,18 @@ import * as React from "react";
 import FilterDropdown from "./FilterDropdown";
 import { useDatagridContext } from "../../context/DatagridContext";
 import getDataItem from "../../lib/getDataItem";
-import { useDatagridFilterDispatch } from "../../context/DatagridFilterContext";
+import {
+  useDatagridFilterContext,
+  useDatagridFilterDispatch,
+} from "../../context/DatagridFilterContext";
 
-interface IPros {}
+interface IPros {
+  setDisplay: () => void;
+}
 
-const FilterSelector: React.FC<IPros> = () => {
+const FilterSelector: React.FC<IPros> = ({ setDisplay }) => {
   const context = useDatagridContext();
+  const filterContext = useDatagridFilterContext();
   const filterDispatch = useDatagridFilterDispatch();
 
   const [col, setCol] = React.useState<string>("");
@@ -64,6 +70,7 @@ const FilterSelector: React.FC<IPros> = () => {
         filteredData: filteredData,
         filteredDataLength: filteredData.length,
       });
+      setDisplay();
     }
   };
 
@@ -87,6 +94,7 @@ const FilterSelector: React.FC<IPros> = () => {
   };
 
   return (
+    // filterContext._isFiltered && (
     <div className="ac-datagrid--option_bar__filter_selector">
       <ul className="filter_selector__list">
         <li className="filter_selector__item">
@@ -115,6 +123,7 @@ const FilterSelector: React.FC<IPros> = () => {
         </li>
       </ul>
     </div>
+    //  )
   );
 };
 
