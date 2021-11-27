@@ -1,12 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as React from "react";
 
+import { IColumn, IDatagridContext, IDataItem } from "../../@interface";
 import { useDatagridFilterContext } from "../../context/DatagridFilterContext";
-import {
-  useDatagridContext,
-  useDatagridDispatch,
-} from "../../context/DatagridContext";
-import { IColumn, IDataItem, IDatagridContext } from "../../@interface";
+import { useDatagridContext } from "../../context/DatagridContext";
+
 import predefinedFormatter from "../../lib/predefinedFormatter";
 
 interface IProps {
