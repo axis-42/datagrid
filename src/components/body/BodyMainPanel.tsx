@@ -7,7 +7,6 @@ import {
 } from "../../context/DatagridLayoutContext";
 import throttle from "lodash.throttle";
 import BodyTable from "./BodyTable";
-import BodyAsidePanel from "./BodyAsidePanel";
 
 interface IProps {
   startRowIndex: number;
@@ -35,10 +34,11 @@ const BodyMainPanel: React.FC<IProps> = ({
 
   const containerStyle = React.useMemo(
     () => ({
-      width: _bodyWidth,
+      left: lineNumberColumnWidth,
+      width: _bodyWidth - lineNumberColumnWidth,
       height: _bodyHeight,
     }),
-    [_bodyWidth, _bodyHeight]
+    [_bodyWidth, _bodyHeight, lineNumberColumnWidth]
   );
 
   const bodyContentWidth = React.useMemo(() => {
@@ -100,12 +100,11 @@ const BodyMainPanel: React.FC<IProps> = ({
     ]
   );
 
-  const onScroll: React.UIEventHandler<HTMLDivElement> =
-    React.useCallback(() => {
-      const scrollTop = panelScrollRef.current?.scrollTop || 0;
-      const scrollLeft = panelScrollRef.current?.scrollLeft || 0;
-      return throttledScroll(scrollTop, scrollLeft);
-    }, [throttledScroll]);
+  const onScroll: React.UIEventHandler<HTMLDivElement> = React.useCallback(() => {
+    const scrollTop = panelScrollRef.current?.scrollTop || 0;
+    const scrollLeft = panelScrollRef.current?.scrollLeft || 0;
+    return throttledScroll(scrollTop, scrollLeft);
+  }, [throttledScroll]);
 
   React.useEffect(() => {
     if (panelScrollRef.current) {
@@ -125,16 +124,10 @@ const BodyMainPanel: React.FC<IProps> = ({
       onScroll={onScroll}
     >
       <div data-panel={"scroll-content"} style={contentContainerStyle}>
-        <BodyAsidePanel
-          startRowIndex={startRowIndex}
-          endRowIndex={endRowIndex}
-          styleTop={0}
-        />
         <BodyTable
           columns={context._colGroup}
           startRowIndex={startRowIndex}
           endRowIndex={endRowIndex}
-          lineNumberColumnWidth={lineNumberColumnWidth}
         />
       </div>
     </div>

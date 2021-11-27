@@ -7,27 +7,17 @@ interface IProps {
   columns: IColumn[];
   startRowIndex: number;
   endRowIndex: number;
-  lineNumberColumnWidth: number;
 }
 
 const BodyTable: React.FC<IProps> = ({
   columns,
   startRowIndex,
   endRowIndex,
-  lineNumberColumnWidth,
 }) => {
   const context = useDatagridContext();
 
-  const tableStyle = React.useMemo(
-    () => ({ left: lineNumberColumnWidth }),
-    [lineNumberColumnWidth]
-  );
-
   return (
-    <table
-      className="ac-datagrid--body--main__panel--body__table"
-      style={tableStyle}
-    >
+    <table>
       <colgroup>
         {columns.map((col, ci) => (
           <col key={ci} style={{ width: col._width }} />

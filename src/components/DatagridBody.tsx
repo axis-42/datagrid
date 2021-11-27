@@ -8,6 +8,7 @@ import {
   useDatagridLayoutContext,
   useDatagridLayoutDispatch,
 } from "../context/DatagridLayoutContext";
+import BodyAsidePanel from "./body/BodyAsidePanel";
 
 const DatagridBody: React.FC<IDatagridBody> = (props) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -46,6 +47,11 @@ const DatagridBody: React.FC<IDatagridBody> = (props) => {
 
   return (
     <div ref={containerRef} className="ac-datagrid--body" style={props.style}>
+      <BodyAsidePanel
+        startRowIndex={startRowIndex}
+        endRowIndex={endRowIndex}
+        styleTop={styleTop}
+      />
       <BodyLeftPanel />
       <BodyMainPanel
         startRowIndex={startRowIndex}
