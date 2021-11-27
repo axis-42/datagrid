@@ -10,6 +10,7 @@ interface IProps {
   startRowIndex: number;
   endRowIndex: number;
 }
+
 const BodyTable: React.FC<IProps> = ({
   columns,
   startRowIndex,
