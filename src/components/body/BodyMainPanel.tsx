@@ -82,6 +82,7 @@ const BodyMainPanel: React.FC<IProps> = ({
   const throttledScroll = React.useMemo(
     () =>
       throttle((scrollTop: number, scrollLeft: number) => {
+
         // check scrollTop, scrollLeft limit
         const contentScrollableHeight = Math.max(
           0,

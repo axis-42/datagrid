@@ -4,6 +4,11 @@ export enum ContextActionTypes {
   SET_STATE = "SET_STATE",
 }
 
+export enum FilterContextActionTypes {
+  SET_FILTER = "SET_FILTER",
+  SET_STATE = "SET_STATE",
+}
+
 export enum LayoutContextActionTypes {
   SET_HOVER = "SET_HOVER",
   SET_SCROLL = "SET_SCROLL",
@@ -103,6 +108,9 @@ export interface IDatagridStatusBar extends IDatagridCommonProps {
   showScroller?: boolean;
   scrollerSize?: number;
 }
+export interface IDatagridOptionBar extends IDatagridCommonProps {
+  isFiltered: boolean;
+}
 
 // local variables
 export interface IDatagridContext extends IDatagridProps {
@@ -111,6 +119,12 @@ export interface IDatagridContext extends IDatagridProps {
   _colGroup?: IColumn[];
   _totalWidthOfColumns?: number; // 계산된 컬럼들의 너비 합
   _frozenPanelWidth?: number;
+}
+
+export interface IDatagridFilterContext {
+  _isFiltered: boolean;
+  _filteredData: IData;
+  _filteredDataLength: number;
 }
 
 export interface IDatagridLayoutContext {

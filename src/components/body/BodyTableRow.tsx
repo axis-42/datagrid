@@ -1,10 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as React from "react";
-import {
-  useDatagridContext,
-  useDatagridDispatch,
-} from "../../context/DatagridContext";
+import { useDatagridContext, useDatagridDispatch, } from "../../context/DatagridContext";
 import { IColumn, IDatagridContext, IDataItem } from "../../@interface";
+import { useDatagridFilterContext } from "../../context/DatagridFilterContext";
 
 interface IProps {
   columns: IColumn[];
@@ -19,6 +17,7 @@ type Position = {
 
 const BodyTableRow: React.FC<IProps> = ({ columns, rowIndex, rowItem }) => {
   const context = useDatagridContext();
+  const filterContext = useDatagridFilterContext();
   const [editingPosition, setEditingPosition] = React.useState<Position>({
     col: -1,
     row: -1,
@@ -32,6 +31,10 @@ const BodyTableRow: React.FC<IProps> = ({ columns, rowIndex, rowItem }) => {
     }),
     [context.bodyRowHeight]
   );
+
+  React.useEffect(() => {
+    renderItem(columns, rowItem);
+  });
 
   const customClickHandler = React.useCallback(
     (
