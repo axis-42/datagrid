@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as React from "react";
-import { useDatagridContext, useDatagridDispatch, } from "../../context/DatagridContext";
 import { IColumn, IDatagridContext, IDataItem } from "../../@interface";
 import { useDatagridFilterContext } from "../../context/DatagridFilterContext";
+import { useDatagridContext } from "../../context/DatagridContext";
+import predefinedFormatter from "../../lib/predefinedFormatter";
 
 interface IProps {
   columns: IColumn[];
@@ -31,10 +32,6 @@ const BodyTableRow: React.FC<IProps> = ({ columns, rowIndex, rowItem }) => {
     }),
     [context.bodyRowHeight]
   );
-
-  React.useEffect(() => {
-    renderItem(columns, rowItem);
-  });
 
   const customClickHandler = React.useCallback(
     (
@@ -108,6 +105,19 @@ const BodyTableRow: React.FC<IProps> = ({ columns, rowIndex, rowItem }) => {
       const item = Array.isArray(rowItem.value)
         ? rowItem.value[Number(col.key)]
         : rowItem.value[String(col.key)];
+
+      let formattedItem: React.ReactNode;
+      if (
+        typeof col.formatter === "string" &&
+        col.formatter in predefinedFormatter
+      ) {
+        formattedItem = predefinedFormatter[col.formatter](item);
+      } else if (typeof col.formatter === "function") {
+        formattedItem = col.formatter(item);
+      } else {
+        formattedItem = item;
+      }
+
       return (
         <td
           className="ac-datagrid--body--main__panel__cell"
@@ -129,7 +139,7 @@ const BodyTableRow: React.FC<IProps> = ({ columns, rowIndex, rowItem }) => {
               onKeyUp={(evt) => onKeyUp(evt, item)}
             />
           ) : (
-            <span>{item}</span>
+            <span>{formattedItem}</span>
           )}
         </td>
       );
