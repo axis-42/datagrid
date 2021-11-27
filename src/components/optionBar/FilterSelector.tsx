@@ -92,19 +92,19 @@ const FilterSelector: React.FC<IPros> = ({ setDisplay }) => {
           />
         </li>
         <li className="filter_selector__item">
-          <label>Value</label>
-          <input
-            type="text"
-            onChange={onChangeHandler}
-            onKeyPress={onKeyPressHandler}
-          />
-        </li>
-        <li className="filter_selector__item">
           <label>Operators</label>
           <FilterDropdown
             items={["contains", "equals"]}
             selectedItem={oper}
             selectCallBack={operDropDownClickHandler}
+          />
+        </li>
+        <li className="filter_selector__item">
+          <label>Value</label>
+          <input
+            type="text"
+            onChange={onChangeHandler}
+            onKeyPress={onKeyPressHandler}
           />
         </li>
       </ul>
