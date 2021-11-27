@@ -2,8 +2,10 @@ import * as React from "react";
 import FilterIcon from "../../assets/icons/icon-triangle.svg";
 import ResetIcon from "../../assets/icons/icon-reset.svg";
 import { FilterContextActionTypes } from "../../@interface";
-import { useDatagridFilterDispatch } from "../../context/DatagridFilterContext";
-import { useDatagridFilterContext } from "../../context/DatagridFilterContext";
+import {
+  useDatagridFilterContext,
+  useDatagridFilterDispatch,
+} from "../../context/DatagridFilterContext";
 interface IPros {
   onClick: () => void;
   setDisplay: () => void;
@@ -11,8 +13,8 @@ interface IPros {
 
 const FilterToggle: React.FC<IPros> = (props) => {
   const { onClick } = props;
-  const filterDispatch = useDatagridFilterDispatch();
   const filterContext = useDatagridFilterContext();
+  const filterDispatch = useDatagridFilterDispatch();
 
   const onClickHandler = React.useCallback(
     (evt) => {
