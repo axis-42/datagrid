@@ -1,6 +1,7 @@
 import * as React from "react";
 import { IDatagridOptionBar } from "@interface";
 import { useDatagridLayoutContext } from "../../context/DatagridLayoutContext";
+import FreezeTogle from "./FreezeTogle";
 
 const OptionBar: React.FC<IDatagridOptionBar> = () => {
   const layoutContext = useDatagridLayoutContext();
@@ -11,7 +12,7 @@ const OptionBar: React.FC<IDatagridOptionBar> = () => {
   ]);
   return (
     <div className="ac-datagrid--option_bar" style={containerStyle}>
-      optionBar
+      <FreezeTogle />
     </div>
   );
 };
