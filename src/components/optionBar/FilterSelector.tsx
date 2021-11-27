@@ -3,10 +3,7 @@ import * as React from "react";
 import FilterDropdown from "./FilterDropdown";
 import { useDatagridContext } from "../../context/DatagridContext";
 import getDataItem from "../../lib/getDataItem";
-import {
-  useDatagridFilterContext,
-  useDatagridFilterDispatch,
-} from "../../context/DatagridFilterContext";
+import { useDatagridFilterDispatch } from "../../context/DatagridFilterContext";
 
 interface IPros {
   setDisplay: () => void;
@@ -14,7 +11,6 @@ interface IPros {
 
 const FilterSelector: React.FC<IPros> = ({ setDisplay }) => {
   const context = useDatagridContext();
-  const filterContext = useDatagridFilterContext();
   const filterDispatch = useDatagridFilterDispatch();
 
   const [col, setCol] = React.useState<string>("");
@@ -48,15 +44,6 @@ const FilterSelector: React.FC<IPros> = ({ setDisplay }) => {
       if (isIncaseSearch(obj)) filteredData.push(item);
     }
     return filteredData;
-  };
-
-  const onClickHandler: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    filterDispatch({
-      type: FilterContextActionTypes.SET_FILTER,
-      isFiltered: false,
-      filteredData: [],
-      filteredDataLength: 0,
-    });
   };
 
   const onKeyPressHandler: React.KeyboardEventHandler<HTMLInputElement> = (
