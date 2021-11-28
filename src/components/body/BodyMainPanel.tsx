@@ -8,6 +8,7 @@ import {
 import throttle from "lodash.throttle";
 import BodyTable from "./BodyTable";
 import BodyAsidePanel from "./BodyAsidePanel";
+import { useDatagridFilterContext } from "../../context/DatagridFilterContext";
 
 interface IProps {
   startRowIndex: number;
@@ -21,11 +22,15 @@ const BodyMainPanel: React.FC<IProps> = ({
   styleTop,
 }) => {
   const context = useDatagridContext();
+  const filterContext = useDatagridFilterContext();
   const layoutContext = useDatagridLayoutContext();
   const layoutDispatch = useDatagridLayoutDispatch();
+
   const panelScrollRef = React.useRef<HTMLDivElement>(null);
+  const { _isFiltered, _filteredDataLength } = filterContext;
   const { _bodyWidth = 1, _bodyHeight = 1, _scrollTop } = layoutContext;
-  const { dataLength, bodyRowHeight = 20 } = context;
+  const { bodyRowHeight = 20 } = context;
+  const dataLength = _isFiltered ? _filteredDataLength : context.dataLength;
 
   const lineNumberColumnWidth = React.useMemo(() => {
     return context.enableLineNumber
@@ -66,7 +71,6 @@ const BodyMainPanel: React.FC<IProps> = ({
   const throttledScroll = React.useMemo(
     () =>
       throttle((scrollTop: number, scrollLeft: number) => {
-
         // check scrollTop, scrollLeft limit
         const contentScrollableHeight = Math.max(
           0,

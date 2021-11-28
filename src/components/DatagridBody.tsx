@@ -16,10 +16,11 @@ const DatagridBody: React.FC<IDatagridBody> = (props) => {
   const layoutContext = useDatagridLayoutContext();
   const layoutDispatch = useDatagridLayoutDispatch();
   const filterContext = useDatagridFilterContext();
-  const { bodyRowHeight = 20, dataLength } = context;
-  const { _filteredDataLength } = filterContext;
-  const { _bodyHeight = 1, _scrollTop } = layoutContext;
+  const { _isFiltered, _filteredDataLength } = filterContext;
+  const { bodyRowHeight = 20 } = context;
+  const dataLength = _isFiltered ? _filteredDataLength : context.dataLength;
 
+  const { _bodyHeight = 1, _scrollTop } = layoutContext;
   const { startRowIndex, endRowIndex, styleTop } = React.useMemo(() => {
     const displayRowCount = Math.floor(_bodyHeight / bodyRowHeight);
     const startRowIndex = Math.floor(_scrollTop / bodyRowHeight);
@@ -28,14 +29,9 @@ const DatagridBody: React.FC<IDatagridBody> = (props) => {
         ? dataLength
         : startRowIndex + displayRowCount;
 
-    const filterEndIndex =
-      startRowIndex + displayRowCount > _filteredDataLength
-        ? _filteredDataLength
-        : startRowIndex + displayRowCount;
-
     return {
       startRowIndex,
-      endRowIndex: filterContext._isFiltered ? filterEndIndex - 1 : endRowIndex,
+      endRowIndex: endRowIndex,
       styleTop: -(_scrollTop % bodyRowHeight),
     };
   }, [_bodyHeight, bodyRowHeight, dataLength, _scrollTop, _filteredDataLength]);

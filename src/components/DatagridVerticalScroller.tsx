@@ -9,12 +9,14 @@ import {
 } from "../context/DatagridLayoutContext";
 import { useDatagridContext } from "../context/DatagridContext";
 import debounce from "lodash.debounce";
+import { useDatagridFilterContext } from "../context/DatagridFilterContext";
 
 const DatagridVerticalScroller: React.FC<IDatagridVerticalScroller> = ({
   style,
   size = 12,
 }) => {
   const context = useDatagridContext();
+  const filterContext = useDatagridFilterContext();
   const layoutContext = useDatagridLayoutContext();
   const layoutDispatch = useDatagridLayoutDispatch();
 
@@ -25,8 +27,11 @@ const DatagridVerticalScroller: React.FC<IDatagridVerticalScroller> = ({
 
   const containerRef = React.useRef<HTMLDivElement>(null);
 
-  const { dataLength, bodyRowHeight = 1 } = context;
+  const { _isFiltered, _filteredDataLength } = filterContext;
+  const { bodyRowHeight = 1 } = context;
   const { _bodyHeight = 1, _scrollTop, _hover } = layoutContext;
+  const dataLength = _isFiltered ? _filteredDataLength : context.dataLength;
+
   const styles: React.CSSProperties = {
     ...style,
     width: size,
