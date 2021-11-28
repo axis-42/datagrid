@@ -3,6 +3,8 @@ import { useDatagridContext } from "../../context/DatagridContext";
 import { IColumn } from "../../@interface";
 import BodyTableRow from "./BodyTableRow";
 import { arrayFromRange, getDataItem } from "../../lib";
+import { useDatagridFilterContext } from "../../context/DatagridFilterContext";
+
 interface IProps {
   columns: IColumn[];
   startRowIndex: number;
@@ -17,6 +19,7 @@ const BodyTable: React.FC<IProps> = ({
   lineNumberColumnWidth,
 }) => {
   const context = useDatagridContext();
+  const filterContext = useDatagridFilterContext();
 
   const tableStyle = React.useMemo(
     () => ({ left: lineNumberColumnWidth }),
@@ -40,12 +43,18 @@ const BodyTable: React.FC<IProps> = ({
             const rowItem = getDataItem(context.data, rowIndex);
             if (rowItem) {
               return (
+                { filterContext._isFiltered ? 
                 <BodyTableRow
                   key={rowIndex}
                   columns={columns}
                   rowIndex={rowIndex}
                   rowItem={rowItem}
-                />
+                /> : 
+              <div>
+               test
+              </div>
+              }
+               
               );
             }
           }
