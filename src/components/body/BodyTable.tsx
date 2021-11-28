@@ -19,8 +19,7 @@ const BodyTable: React.FC<IProps> = ({
   lineNumberColumnWidth,
 }) => {
   const context = useDatagridContext();
-
-  const filteredContext = useDatagridFilterContext();
+  const filterContext = useDatagridFilterContext();
 
   const tableStyle = React.useMemo(
     () => ({ left: lineNumberColumnWidth }),
@@ -41,9 +40,9 @@ const BodyTable: React.FC<IProps> = ({
       <tbody>
         {arrayFromRange(startRowIndex, endRowIndex).map((rowIndex) => {
           if (context.data) {
-            const rowItem = !filteredContext._isFiltered
+            const rowItem = !filterContext._isFiltered
               ? getDataItem(context.data, rowIndex)
-              : getDataItem(filteredContext._filteredData, rowIndex);
+              : getDataItem(filterContext._filteredData, rowIndex);
 
             if (rowItem) {
               return (
