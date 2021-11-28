@@ -18,13 +18,14 @@ const BodyAsidePanel: React.FC<IProps> = ({ startRowIndex, endRowIndex }) => {
   );
 
   const tableStyle = React.useMemo(
-    () => ({ width: layoutContext._lineNumberColumnWidth, height }),
-    [layoutContext._lineNumberColumnWidth, height]
+    () => ({ width: layoutContext._lineNumberColumnWidth }),
+    [layoutContext._lineNumberColumnWidth]
   );
 
-  const rowStyle = React.useMemo(() => ({ height: context.bodyRowHeight }), [
-    context.bodyRowHeight,
-  ]);
+  const rowStyle = React.useMemo(
+    () => ({ height: context.bodyRowHeight }),
+    [context.bodyRowHeight]
+  );
 
   if (!context.enableLineNumber) {
     return null;
